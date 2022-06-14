@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>FreddoFrio - Cadastro</title>
+    <meta charset="utf-8">
+    <meta name="width-device-width">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="img/erp.ico" type="image/x-icon">
+    <style>/* CELULAR (em breve) */
+        @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        }
+        /* TABLET (em breve) */
+        @media screen and (min-device-width : px) and (max-device-width : 800px) {
+        }
+        /* PC */
+        @media screen and (min-device-width : 1200px) {
+            /*======================================*/
+            /*                 GERAL                */
+            /*======================================*/
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: sans-serif;
+                text-decoration: none;
+            }
+            :root {
+                /* azul escuro */
+                --var-primary-color: darkblue;
+                /* azul claro*/
+                --var-secundary-color: rgb(159, 187, 233);
+                /* cinza claro*/
+                --var-tertiary-color: #bbb8b8;
+                /* rosa */
+                --var-quaternary-color: lightcoral;
+            }
+            body{
+                background-color: var(--var-tertiary-color);
+            }
+            .cabecalho{
+                height: 55px;
+                padding-left: 65px;
+                padding-right: 20px; 
+                background-color: var(--var-primary-color);
+            }
+            /*======================================*/
+            /*              BOTÃO MENU              */
+            /*======================================*/
+            .btnAbre{
+                position: absolute;
+                top: 10px;
+                left: 20px;
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .btnAbre span{
+                font-size: 35px;
+            }
+            .btnFecha{
+                position: relative;
+                left: 20px;
+                top: 3px;
+                border: 1px solid white;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            .btnFecha:hover{
+                border: 1px solid red;
+            }
+            /*======================================*/
+            /*                 MENU                 */
+            /*======================================*/ 
+            .menuLateral{
+                background-color: var(--var-primary-color);
+                width: 250px;
+                left: -250px;
+                position: fixed; /*alterado*/
+                transition: left 0.5s;
+                /*adicionado*/
+                margin-left: auto;
+                margin-right: auto;
+                overflow-y: auto;
+                height: 700px;
+            }
+            .menuLateral.mostra{
+                left: 0;
+            }
+            .menuLateral .titulo{
+                height: 55px;
+                color: white;
+                text-align: center;
+                font-weight: bold;
+                line-height: 45px;
+                font-size: 24px;
+                border-bottom: 2px solid salmon;
+            }
+            .menuLateral ul{
+                list-style: none;
+            }
+            .menuLateral ul li{
+                line-height: 40px;
+                border: 1px dotted black;
+            }
+            .menuLateral ul li a{
+                color: white;
+                text-decoration: none;
+                font-size: 20px;
+                padding-left: 40px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                box-sizing: border-box;
+                font-weight: bold;
+                display: block;
+            }
+            .menuLateral ul li a:hover{
+                background-color: #1E1E1E;
+                text-shadow: 3px 3px 5px black;
+                transition: 0.5s;
+                color: lime;
+                border-radius: 0px 20px 20px 0px;
+            }
+            .menuLateral ul ul li a{
+                font-size: 16px;
+                font-weight: 300;
+                padding-left: 60px;
+                background-color: rgb(187, 184, 184);
+                border-radius: 20px;
+                color: rgb(2, 31, 58);
+            }
+            .menuLateral ul ul{
+                display: none;
+            }
+            .menuLateral ul .itensCadastro.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensEstoque.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensVendas.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensFinanceiros.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensRelatorios.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensNotas.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensLojas.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensContratos.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensAtendimento.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensAgenda.mostra{
+                display: block;
+            }
+            .menuLateral ul .itensFuncionarios.mostra{
+                display: block;
+            }
+            .menuLateral ul li a span{
+                font-size: 28px;
+                position: absolute;
+                padding-top: 5px;
+                left: 10px;
+            }
+            #user_flex{
+                padding: 7px;
+                display: flex;
+                justify-content: flex-end;
+            }
+            #flex_pesquisa{
+                display: flex;
+                margin: 10px 500px;
+                background-color: white;
+                border-radius: 15px;
+            }
+            #flex_pesquisa input{
+                height: 30px;
+                width: 300px;
+                padding-left: 10px;
+                border: none;
+                border-radius: 50%;
+            }
+            #flex_pesquisa button{
+                height: 30px;
+                margin-right: 5px;
+                background-color: white;
+                border: none;
+                border-radius: 50%;
+            }
+            #user{
+                width: 150px;
+                display: flex;
+                justify-content: space-around;
+                color: white;
+            }
+            #user img{
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+            /*======================================*/
+            /*              CABEÇALHO               */
+            /*======================================*/ 
+            #cabecalho{
+                height: 40px;
+                padding: 5px;
+                background-color: #1E1E1E;
+                border-top: 5px double #e6e6e6;
+                border-bottom: 5px double #e6e6e6;
+                display: flex;
+            }
+            #cabecalho h1{
+                color: lime;
+                font-size: 20px;
+                font-weight: lighter;
+            }
+            #cabecalho p{
+                margin: 5px;
+                color: white;
+                font-size: 15px;
+                font-weight: lighter;
+            }
+            /*======================================*/
+            /*                PÁGINA                */
+            /*======================================*/
+            main{
+                display: flex;
+                justify-content: center;
+            }
+            .cad-funcionario{
+                background-color: var(--var-tertiary-color);
+                height: 100%;
+                width: 1000PX;
+                padding: 10PX;
+            }
+            /*======================================*/
+            /*                TITULOS               */
+            /*======================================*/
+            .cab-titulo{
+                height: 40px;
+                padding: 5px;
+                display: flex;
+                background-color: var(--var-primary-color);
+                color: white;
+                font-size: 15px;
+                border-radius: 5px 5px 0px 0px;
+                text-shadow: 3px 3px 5px black;
+            }
+            .cab-titulo h3{
+                font-size: x-large;
+            }
+            .div-titulo{
+                font-size: 20px;
+                color: white;
+                text-shadow: 2px 2px 5px black;
+            }
+            /*======================================*/
+            /*              CONTAINERS              */
+            /*======================================*/
+            .containers{
+                border: 5px double var(--var-primary-color);
+                margin-top: 15px;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-bottom: 15px;
+                border-radius: 10px;
+                background-color: var(--var-secundary-color);
+                box-shadow: 5px 5px 5px black;
+            }
+            .flex{
+                display: flex;
+                justify-content:space-between;
+                flex-flow: wrap;
+                margin: 20px;
+            }
+            form .obrigatorio label::after{
+                color: red;
+                content: "*";
+            }
+            .foto img {
+                width: 200px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                justify-content:center;
+                align-items: center;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+            /*======================================*/
+            /*                INPUTS                */
+            /*======================================*/
+            .containers input{
+                height: 30px;
+                width: 220px;
+                border-radius: 5px;
+                margin-top: 3px;
+                margin-right: 0px;
+                margin-bottom: 20px;
+                padding-left: 10px;
+            }
+            #cadastrar input[type="checkbox"] {
+                margin: 0 12px 0 0;
+                vertical-align: middle;
+                position: relative;
+                top: -2px;
+                padding: 5px;
+            }
+            #cadastrar select{
+                height: 30px;
+                width: 220px;
+                border: 1px solid var(--var-primary-color);
+                border-radius: 5px;
+                margin-top: 3px;
+                margin-right: 0px;
+                margin-bottom: 25px;
+            }
+            .botao-final button {
+                border: none;
+                border-radius: 4px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            small{
+                color: rgb(126, 125, 125);
+                font-size: 70%;
+            }
+            input[type='file'] {
+                display: none
+            }
+            .input-wrapper label {
+                background-color: var(--var-primary-color);
+                border-radius: 5px;
+                color: #fff;
+                margin: 10px;
+                padding: 6px 20px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 200px;
+            }
+            a {
+                text-decoration: none;
+                color: white;
+            }
+            #btns_final{
+                display: flex;
+                justify-content: center;
+            }
+            #btn-salvar{
+                height: 30px;
+                width: 100px;
+                margin: 5px;
+                color: white;
+                background-color: var(--var-primary-color);
+                border-color: #e6e6e6;
+            }
+            #btn_cancel{
+                height: 30px;
+                width: 100px;
+                margin: 5px;
+                color: white;
+                background-color: red;
+                border-color: #e6e6e6;
+            }
+            #btn_cancel a{
+                color: #e6e6e6;
+            }
+            /*======================================*/
+            /*             MAIS PÁGINAS             */
+            /*======================================*/ 
+            #btn-mais-produtos{
+                margin-bottom: 10px;
+                display: flex;
+                justify-content: center;
+            }
+            #btn-mais-produtos button{
+                background-color: #1E1E1E;
+            }
+            #btn-mais-produtos a{
+                padding: .5em;
+                color: lime;
+                text-decoration: none;
+                border: 5px double #e6e6e6;
+            }
+
+            footer{
+                height: 40px;
+                padding: 5px;
+                background-color: #1E1E1E;
+                border-top: 5px double #e6e6e6;
+                border-bottom: 5px double #e6e6e6;
+                display: flex;
+                justify-content: center;
+            }
+            footer p{
+                color: white;
+                margin: 2px 20px 0px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="cabecalho">
+        <!---------------------------------------------------------->
+        <!--                     SIDE MENU                        -->
+        <!---------------------------------------------------------->
+        <div class="btnAbre"><span class="material-icons">menu</span></div>
+        <nav class="menuLateral">
+            <!--                   BOTÃO FECHAR                   -->
+            <div class="titulo">Menu<span class="material-icons btnFecha">close</span></div>
+            <!--                     SUBMENUS                     -->
+            <ul>
+                <!--                  DASHBOARD                   -->
+                <li><a href="1.1.0_dashboard.html"><span class="material-icons">dashboard</span>Dashboard</a></li>
+                <!--                  CADASTRO                    -->
+                <li><a href="#" class="Cadastro"><span class="material-icons">app_registration</span>Cadastro</a>
+                    <ul class="itensCadastro">
+                        <li><a href="2.1.0_cadastro_cliente.html"><span
+                                    class="material-icons">person_add_alt_1</span>Clientes</a></li>
+                        <li><a href="2.2.0_cadastro_fornecedores.html"><span
+                                    class="material-icons">connect_without_contact</span>Fornecedores</a></li>
+                        <li><a href="2.3.0_cadastro_funcionários.html"><span
+                                    class="material-icons">connect_without_contact</span>Funcionários</a></li>
+                        <li><a href="2.4.0_cadastro_produtos.html"><span class="material-icons">local_mall</span>Produtos</a>
+                        </li>
+                        <li><a href="2.5.0_cadastro_servico.html"><span
+                                    class="material-icons">precision_manufacturing</span>Serviços</a></li>
+                    </ul>
+                </li>
+                <!--                   ESTOQUE                    -->
+                <li><a href="#" class="Estoque"><span class="material-icons">view_in_ar</span>Estoque</a>
+                    <ul class="itensEstoque">
+                        <li><a href="3.1.0_todos_os_produtos.html"><span class="material-icons">account_tree</span>Todos os
+                                Produtos</a></li>
+                        <li><a href="3.2.0_transferencias_estoque.html"><span
+                                    class="material-icons">sync_alt</span>Transferência</a></li>
+                        <li><a href="3.3.0_cotacoes_estoque.html"><span class="material-icons">payments</span>Cotação Online</a>
+                        </li>
+                        <li><a href="3.4.0_compras_estoque.html"><span
+                                    class="material-icons">local_grocery_store</span>Compras</a></li>
+                        <li><a href="3.5.0_etiquetas_estoque.html"><span class="material-icons">local_offer</span>Etiquetas</a>
+                        </li>
+                        <li><a href="3.6.0_grupos_estoque.html"><span class="material-icons">local_offer</span>Grupos</a></li>
+                    </ul>
+                </li>
+                <!--                  ORÇAMENTOS                  -->
+                <li><a href="4.1.0_todos_os_orçamentos.html" class="Orcamentos"><span
+                            class="material-icons">table_view</span>Orçamentos</a></li>
+                <!--              ORDENS DE SERVIÇO               -->
+                <li><a href="5-1-0_listar_ordens_de_serviço.html" class="OrdemServico"><span
+                            class="material-icons">fact_check</span>Ordens de Serviços</a></li>
+                <!--                   VENDAS                     -->
+                <li><a href="#" class="Vendas"><span class="material-icons">production_quantity_limits</span>Vendas</a>
+                    <ul class="itensVendas">
+                        <li><a href="6.1.0_histórico_de_vendas.html"><span class="material-icons">shopping_basket</span>Todas as
+                                Vendas</a></li>
+                        <li><a href="6.1.1_abertura_de_caixa.html">Balcão</a></li>
+                    </ul>
+                </li>
+                <!--                  FINANCEIRO                  -->
+                <li><a href="#" class="Financeiro"><span class="material-icons">paid</span>Financeiro</a>
+                    <ul class="itensFinanceiros">
+                        <li><a href="7.1.0_plano_de_contas.html"><span class="material-icons">pending_actions</span>Plano de
+                                Contas</a>
+                        </li>
+                        <li><a href="7.2.0_contas_a_pagar.html"><span class="material-icons">pending_actions</span>Contas a
+                                Pagar</a>
+                        </li>
+                        <li><a href="7.3.0_contas_a_receber.html"><span class="material-icons">pending_actions</span>Contas a
+                                Receber</a></li>
+                        <li><a href="7.4.0_fluxo_de_caixa.html"><span class="material-icons">mediation</span>Fluxo de Caixa</a>
+                        </li>
+                        <li><a href="7.5.0_conciliacao_bancaria.html"><span
+                                    class="material-icons">supervisor_account</span>Conciliação
+                                Bancária</a></li>
+                        <li><a href="7.6.0_mais_opcoes.html"><span class="material-icons">receipt</span>Mais Opções</a></li>
+                    </ul>
+                </li>
+                <!--                  RELATÓRIOS                  -->
+                <li><a href="#" class="Relatorios"><span class="material-icons">pending_actions</span>Relatórios</a>
+                    <ul class="itensRelatorios">
+                        <li><a href="8.1.0_todos_relatorios.html"><span class="material-icons">trending_up</span>Todos os
+                                Relatórios</a>
+                        </li>
+                        <li><a href="8.1.1_novo_relatorio_cadastro.html"><span class="material-icons">source</span>Relatóiro de
+                                Cadastro</a></li>
+                        <li><a href="8.1.4_novo_relatorio_financeiro.html"><span class="material-icons">savings</span>Relatório
+                                Financeiro</a></li>
+                        <li><a href="8.1.3_novo_relatorio_vendas.html"><span
+                                    class="material-icons">shopping_basket</span>Relatório de
+                                Vendas</a></li>
+                        <li><a href="8.1.2_novo_relatorio_estoque.html"><span class="material-icons">view_in_ar</span>Relatório
+                                de
+                                Estoque</a></li>
+                    </ul>
+                </li>
+                <!--                    NOTAS                     -->
+                <li><a href="#" class="Notas"><span class="material-icons">find_in_page</span>Notas Fiscais</a>
+                    <ul class="itensNotas">
+                        <li><a href="9.1.0_emissao_nf-e.html"><span class="material-icons">note_add</span>Emissão de NF-e</a>
+                        </li>
+                        <li><a href="9.2.0_emissao_nfs-e.html"><span class="material-icons">note_add</span>Emissão de NFS-e</a>
+                        </li>
+                        <li><a href="9.3.0_emissao_nfc-e.html"><span class="material-icons">note_add</span>Emissão de NFC-e</a>
+                        </li>
+                        <li><a href="9.4.0_mais_opcoes.html"><span class="material-icons">note_add</span>Mais Opções</a></li>
+                    </ul>
+                </li>
+                <!--                    LOJAS                     -->
+                <li><a href="#" class="Lojas"><span class="material-icons">store</span>Lojas</a>
+                    <ul class="itensLojas">
+                        <li><a href="10.1.0_multiempresas.html"><span class="material-icons">store</span>Multiempresas</a></li>
+                    </ul>
+                </li>
+                <!--                  CONTRATOS                   -->
+                <li><a href="#" class="Contratos"><span class="material-icons">library_books</span>Contratos</a>
+                    <ul class="itensContratos">
+                        <li><a href="11.1.0_todos_os_contratos.html"><span class="material-icons">preview</span>Gestão de
+                                Contratos</a>
+                        </li>
+                        <li><a href="11.2.0_situacao_de_contratos.html"><span class="material-icons">preview</span>Situação de
+                                Contratos</a></li>
+                        <li><a href="11.3.0_assinaturas.html"><span class="material-icons">redeem</span>Assinaturas</a></li>
+                    </ul>
+                </li>
+                <!--                ATENDIMENTOS                  -->
+                <li><a href="#" class="Atendimentos"><span class="material-icons">support_agent</span>Atendimentos</a>
+                    <ul class="itensAtendimento">
+                        <li><a href="12.1.0_todos_os_atendimentos.html"><span
+                                    class="material-icons">settings_phone</span>Chamadas</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--                   AGENDA                     -->
+                <li><a href="#" class="Agenda"><span class="material-icons">insert_invitation</span>Agenda</a>
+                    <ul class="itensAgenda">
+                        <li><a href="13.1.0_agenda.html"><span class="material-icons">event</span>Agenda Online</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!---------------------------------------------------------->
+        <!--                      CABEÇALHO                       -->
+        <!---------------------------------------------------------->
+        <div id="user_flex">
+            <!--                    PESQUISA                      -->
+            <div id="flex_pesquisa">
+                <div><input type="search" name="busca_geral" placeholder="Buscar no sistema"></div>
+                <div><button><a href="#"><img src="https://img.icons8.com/android/20/000000/search.png"/></a></button></div>
+            </div>
+            <!--                     USUÁRIO                      -->
+            <div id="user">
+                <div><img src="img/Logo.png" height="40px" width="40px"></div>
+                <div>
+                    <div><p>FreddoFrio</p></div>
+                    <div><p>@Jefferson</p></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- GUIA DE PÁGINA -->
+    <div id="cabecalho">
+        <p>Cadastro &gt;</p>
+        <h1>Novo Funcionário</h1>
+    </div>
+    <!---------------------------------------------------------->
+    <!---                    PÁGINA                          --->
+    <!---------------------------------------------------------->
+    <main>
+        <div class="cad-funcionario">
+            <div id="cadastrar">
+                <form>
+                    <div class="containers" id="container-1">
+                        <div class="foto"> 
+                            <div>
+                                <img src="img/sem-foto.png" alt="">
+                            </div>
+                        </div>
+    
+                        <div class='input-wrapper'>
+                            <label for='input-file'>
+                                Selecionar um arquivo
+                            </label>
+                            <input id='input-file' type='file' value='' />
+                            <span id='file-name'></span>
+                        </div>
+                    </div>
+                    <div class="containers" id="container-2">
+                        <div class="cab-titulo">
+                            <h2>Dados gerais</h2>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="obrigatorio">
+                                <label for="Name">Nome</label><br>
+                                <input type="Name" name="nomeFuncionario" th:field="*{nomeFuncionario}">
+                            </div> 
+                            <div>
+                                <label for="cpf">CPF</label><br>
+                                <input type="text" name="cpfFuncionario" th:field="*{cpfFuncionario}">
+                            </div>    
+                            <div>
+                                <label for="rg">RG</label><br>
+                                <input type="text" name="rgFuncionario" th:field="*{rgFuncionario}">
+                            </div>    
+                            <div>
+                                <label for="date">Data de Nascimento</label><br>
+                                <input type="date" name="dataNascimentoFuncionario" th:field="*{dataNascimentoFuncionario">
+                            </div>     
+                            <div class="obrigatorio">
+                                <label for="email">E-mail</label><br>
+                                <input type="email" name="email" th:field="email">
+                            </div>
+                            <div>
+                                <label for="email">E-mail Auxiliar</label><br>
+                                <input type="email" name="email-auxiliar">
+                            </div>
+                            <div>
+                                <label for="comissao">Comissão<small>(%)</small></label><br>
+                                <input  value="0,00" type="text" name="comissao" placeholder>
+                            </div>
+                            <div>
+                                <label for="optipo">Sexo</label><br>
+                                <select name="" class="op">
+                                    <option value="">Selecione</option>
+                                    <option value="">Masculino</option>
+                                    <option value="">Feminino</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="containers" id="container-3">
+                        <div class="cab-titulo">
+                            <h2>Contatos</h2>
+                        </div>
+    
+                        <div class="flex">
+                            <div class="obrigatorio">
+                                <label for="tel">Telefone fixo</label><br>
+                                <input type="text" name="telefone" placeholder="(__)___-____" maxlength="14">
+                            </div>
+    
+                            <div class="obrigatorio">
+                                <label for="cel">Celular 1</label><br>
+                                <input type="text" name="celular1" placeholder="(__)___-____" maxlength="14">
+                            </div>
+                            
+                            <div>
+                                <label for="cel">Celular 2</label><br>
+                                <input type="text" name="celular2" placeholder="(__)___-____" maxlength="14">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="containers" id="container-4">
+                        <div class="cab-titulo">
+                            <h2>Endereço</h2>
+                        </div>
+                        <div class="flex">
+                            <div>
+                                <label for="cep">CEP</label><br>
+                                <input type="text" name="CEP">
+                            </div>
+                            <div>
+                                <label for="logradouro">Logradouro</label><br>
+                                <input type="text" name="logradouro">
+                            </div>
+                            <div>
+                                <label for="num">Número</label><br>
+                                <input type="number" name="numero">
+                            </div>
+                            <div>
+                                <label for="bairro">Bairro</label><br>
+                                <input type="text" name="bairro">
+                            </div>
+                            <div>
+                                <label for="complemento">complemento</label><br>
+                                <input type="text" name="complemento">
+                            </div>
+                            <div>
+                                <label for="city">Cidade/UF</label><br>
+                                <input type="text" name="cidade-uf">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="btns_final">
+                        <button type="submit" id="btn-salvar">Salvar</button>
+                        <button id="btn_cancel"><a href="2.3.0_cadastro_funcionários.html">Cancelar</a></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <img src="https://img.icons8.com/ios-filled/15/ffffff/domain.png"/>
+        <p>www.freddofrio.com.br</p>
+        <img src="https://img.icons8.com/ios-filled/15/ffffff/email-sign.png"/>
+        <p>gestão@freddofrio.com</p>
+    </footer>
+    <script>
+        $('.Cadastro').click(function () {
+            $('.menuLateral ul .itensCadastro').toggleClass('mostra');
+        });
+        $('.Estoque').click(function () {
+            $('.menuLateral ul .itensEstoque').toggleClass('mostra');
+        });
+        $('.Vendas').click(function () {
+            $('.menuLateral ul .itensVendas').toggleClass('mostra');
+        });
+        $('.Financeiro').click(function () {
+            $('.menuLateral ul .itensFinanceiros').toggleClass('mostra');
+        });
+        $('.Relatorios').click(function () {
+            $('.menuLateral ul .itensRelatorios').toggleClass('mostra');
+        });
+        $('.Notas').click(function () {
+            $('.menuLateral ul .itensNotas').toggleClass('mostra');
+        });
+        $('.Lojas').click(function () {
+            $('.menuLateral ul .itensLojas').toggleClass('mostra');
+        });
+        $('.Contratos').click(function () {
+            $('.menuLateral ul .itensContratos').toggleClass('mostra');
+        });
+        $('.Atendimentos').click(function () {
+            $('.menuLateral ul .itensAtendimento').toggleClass('mostra');
+        });
+        $('.Agenda').click(function () {
+            $('.menuLateral ul .itensAgenda').toggleClass('mostra');
+        });
+        $('.Funcionarios').click(function () {
+            $('.menuLateral ul .itensFuncionarios').toggleClass('mostra');
+        });
+        $('.btnAbre').click(function () {
+            $('.menuLateral').toggleClass('mostra');
+        });
+        $('.btnFecha').click(function () {
+            $('.menuLateral').toggleClass('mostra');
+        });
+    </script>
+</body>
+</html>
